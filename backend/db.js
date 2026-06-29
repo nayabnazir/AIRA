@@ -1,15 +1,18 @@
 const mysql = require("mysql2");
 
 const db = mysql.createPool({
-  host: "127.0.0.1",
-  user: "root",
-  password: "",
-  database: "aira_db",
-  port: 3306,
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
-  connectTimeout: 5000
+  connectTimeout: 5000,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 db.getConnection((err, connection) => {
