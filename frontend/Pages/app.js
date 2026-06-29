@@ -598,7 +598,7 @@ function extractFileContent(file) {
 }
 
 /* ================= PAGE WIRING ================= */
-const AIRA_API_BASE = "http://localhost:3000";
+const AIRA_API_BASE = "https://aira-6ovi.onrender.com";
 const AIRA_PROJECT_MEMBERS = ["Laiba Arshad", "Alishba Rustam", "Nayab Nazir"];
 let lastAutoSrsTitle = "";
 let currentAccessSummary = null;
