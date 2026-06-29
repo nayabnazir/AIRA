@@ -19,6 +19,8 @@ app.use("/api", billing.router);
 app.use("/frontend", express.static(path.join(__dirname, "..", "frontend")));
 app.get("/", (_req, res) => res.redirect("/frontend/Pages/home.html"));
 
-app.listen(3000, () => {
-  console.log("Server running on http://localhost:3000");
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
