@@ -17,7 +17,7 @@ app.use("/api", require("./routes/aiModels"));
 app.use("/api", require("./routes/plantUmlRenderer"));
 app.use("/api", billing.router);
 app.use("/frontend", express.static(path.join(__dirname, "..", "frontend")));
-app.get("/", (_req, res) => res.redirect("/frontend/Pages/home.html"));
+app.get("/", (_req, res) => res.redirect("/frontend/Pages/index.html"));
 
 const PORT = process.env.PORT || 3000;
 
