@@ -1,0 +1,56 @@
+AIRA Final Database Design
+
+Database Name:
+aira_db
+
+1. users
+Stores registered users of the system.
+Important fields: user_id, full_name, email, password, role, account_status.
+
+2. projects
+Stores each user's project/documentation workspace.
+This allows SRS documents, UML diagrams, analysis reports, and uploads to be grouped under one project.
+
+3. uploaded_files
+Stores uploaded file metadata for all modules.
+Used for SRS generation, SRS analysis, UML generation, and UML image description.
+
+4. srs_documents
+Stores SRS generation records.
+It keeps the prompt, generated SRS, edited SRS, status, and optional source file.
+
+5. srs_analysis_reports
+Stores SRS analysis results.
+It includes ambiguity score, correctness score, completeness score, and summary.
+
+6. srs_analysis_issues
+Stores individual issues found during SRS analysis.
+Examples: ambiguity, correctness issue, completeness issue, grammar issue, missing requirement.
+
+7. uml_requests
+Stores UML generation requests.
+Supports Use Case, Class, Sequence, ERD, and Activity diagrams.
+
+8. uml_outputs
+Stores generated and edited UML diagram outputs.
+It supports diagram text, diagram JSON for editable diagrams, and image path for exported/generated images.
+
+9. uml_image_descriptions
+Stores UML image explanation results.
+It keeps uploaded image reference, extracted OCR text, generated description, and edited description.
+
+10. export_history
+Stores download/export records.
+Supported formats include TXT, PDF, PNG, and DOCX.
+
+11. activity_history
+Stores user history for dashboard/history page.
+Examples: login, signup, SRS generation, SRS analysis, UML generation, image description, edit, and download.
+
+Main Relationships:
+- One user can have many projects.
+- One project can have many uploaded files, SRS documents, SRS reports, UML requests, and exports.
+- One SRS analysis report can have many analysis issues.
+- One UML request can have one or more UML outputs.
+- Uploaded files can be linked to SRS generation, SRS analysis, UML generation, or UML image description.
+- Activity history stores all important user actions for the My History page.

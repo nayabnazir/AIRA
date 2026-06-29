@@ -1,0 +1,143 @@
+{
+  "model_family": "TF-IDF + LinearSVC classifier, TF-IDF nearest-pattern retriever",
+  "training_rows": 195,
+  "diagram_types": [
+    "activity",
+    "class",
+    "erd",
+    "sequence",
+    "use_case"
+  ],
+  "type_classifier": {
+    "accuracy": 1.0,
+    "classification_report": {
+      "activity": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 8.0
+      },
+      "class": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 7.0
+      },
+      "erd": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 12.0
+      },
+      "sequence": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 8.0
+      },
+      "use_case": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 8.0
+      },
+      "accuracy": 1.0,
+      "macro avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 43.0
+      },
+      "weighted avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 43.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        8,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        7,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        12,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        8,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        8
+      ]
+    ],
+    "labels": [
+      "activity",
+      "class",
+      "erd",
+      "sequence",
+      "use_case"
+    ],
+    "test_size": 43,
+    "train_size": 152
+  },
+  "sample_predictions": [
+    {
+      "text": "patient books appointment and doctor uploads prescription",
+      "predicted_diagram_type": "erd",
+      "nearest_training_pattern": "Need entity relationship model for storing patient, doctor, appointment, and prescription.",
+      "similarity": 0.46246085269274495
+    },
+    {
+      "text": "show database tables for books members fines and borrowed records",
+      "predicted_diagram_type": "erd",
+      "nearest_training_pattern": "Show database tables for dataset, forecast, model, and report in the forecasting system.",
+      "similarity": 0.4148141029133506
+    },
+    {
+      "text": "student logs in then frontend calls backend and database returns result",
+      "predicted_diagram_type": "sequence",
+      "nearest_training_pattern": "Show step by step interaction between user, frontend, backend, and database for view records.",
+      "similarity": 0.3332340775289442
+    },
+    {
+      "text": "create classes for order product payment and customer",
+      "predicted_diagram_type": "class",
+      "nearest_training_pattern": "Create class diagram for ecommerce system with classes product, order, payment, and cart.",
+      "similarity": 0.42365431017687316
+    },
+    {
+      "text": "show decision workflow for approving forecast reports",
+      "predicted_diagram_type": "activity",
+      "nearest_training_pattern": "Draw workflow for book appointments, validation, approval, and notification.",
+      "similarity": 0.20545390619516166
+    }
+  ],
+  "saved_files": {
+    "type_model": "E:\\New folder\\FYP\\AI_SRS_UML_Project\\AIRA_ML\\uml_diagram_type_pipeline.joblib",
+    "structure_retriever": "E:\\New folder\\FYP\\AI_SRS_UML_Project\\AIRA_ML\\uml_structure_retriever.joblib",
+    "backend_type_model": "E:\\New folder\\FYP\\AI_SRS_UML_Project\\backend\\aira-ai\\models\\uml_diagram_type_pipeline.joblib",
+    "backend_structure_retriever": "E:\\New folder\\FYP\\AI_SRS_UML_Project\\backend\\aira-ai\\models\\uml_structure_retriever.joblib"
+  }
+}

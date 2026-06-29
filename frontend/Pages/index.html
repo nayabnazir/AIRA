@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>AIRA - AI SRS and UML Generator</title>
+    <link rel="icon" type="image/png" href="assets/aira-logo-mark.png">
+    <link rel="stylesheet" href="style.css?v=20260614-srs-layout-v4">
+</head>
+
+<body class="page-home">
+
+<header class="topbar">
+    <div class="menu-icon" onclick="toggleSidebar()">&#9776;</div>
+    <h2 class="top-title"><span class="top-logo" aria-hidden="true"><img src="assets/aira-logo-mark.png" alt=""></span><span class="top-title-text">AIRA - Artificial Intelligence Requirement Analyzer</span></h2>
+</header>
+
+<div class="layout">
+    <aside class="sidebar collapsed" id="sidebar">
+        <ul>
+            <li class="active">Home</li>
+            <li onclick="location.href='generate-srs.html'">Generate SRS</li>
+            <li onclick="location.href='generate-uml.html'">Generate UML</li>
+            <li onclick="location.href='check-srs.html'">AI Analysis</li>
+            <li onclick="location.href='upload-uml.html'">UML Image Description</li>
+            <hr>
+            <li onclick="location.href='history.html'">My History</li>
+            <li onclick="location.href='login.html'">Login</li>
+            <li onclick="location.href='signup.html'">Sign Up</li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <div class="home-wrapper">
+            <div class="hero-panel">
+                <div class="hero-copy">
+                    <span class="eyebrow">AI Requirements Workspace</span>
+                    <h1>Turn raw project ideas into polished SRS documents and UML assets.</h1>
+                    <p>
+                        AIRA helps students, analysts, and developers structure requirements,
+                        review ambiguity, and generate diagram-ready outputs from one focused workspace.
+                    </p>
+
+                    <div class="hero-actions">
+                        <button class="primary-btn" type="button" onclick="location.href='generate-srs.html'">Start an SRS</button>
+                        <button class="secondary-btn hero-secondary" type="button" onclick="location.href='generate-uml.html'">Create UML</button>
+                    </div>
+                </div>
+
+                <div class="hero-highlight">
+                    <div class="highlight-card">
+                        <span class="highlight-label">Core Workflow</span>
+                        <h3>Draft, validate, visualize</h3>
+                        <p>Move from requirement notes to reviewable documentation with a cleaner, guided process.</p>
+                    </div>
+
+                    <div class="hero-metrics">
+                        <div class="metric-card">
+                            <strong>4</strong>
+                            <span>AI-assisted tools</span>
+                        </div>
+                        <div class="metric-card">
+                            <strong>SRS</strong>
+                            <span>Generation and analysis</span>
+                        </div>
+                        <div class="metric-card">
+                            <strong>UML</strong>
+                            <span>Creation and explanation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-heading">
+                <span class="eyebrow">Capabilities</span>
+                <h2>Everything organized around documentation quality</h2>
+            </div>
+
+            <div class="features">
+                <div class="feature-card" onclick="location.href='generate-srs.html'">
+                    <span class="feature-tag">Specification</span>
+                    <h3>SRS Generation</h3>
+                    <p>Generate structured software requirement specifications from project descriptions and supporting files.</p>
+                </div>
+
+                <div class="feature-card" onclick="location.href='generate-uml.html'">
+                    <span class="feature-tag">Modeling</span>
+                    <h3>UML Diagrams</h3>
+                    <p>Produce editable UML output for use case, class, sequence, and activity-style workflows.</p>
+                </div>
+
+                <div class="feature-card" onclick="location.href='check-srs.html'">
+                    <span class="feature-tag">Review</span>
+                    <h3>AI Analysis</h3>
+                    <p>Inspect requirement clarity, completeness, and ambiguity before documentation moves forward.</p>
+                </div>
+
+                <div class="feature-card" onclick="location.href='upload-uml.html'">
+                    <span class="feature-tag">Interpretation</span>
+                    <h3>UML Image Description</h3>
+                    <p>Upload UML images and receive a readable explanation that supports reports, reviews, and learning.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<footer class="footer">
+    Final Year Project - AIRA
+</footer>
+
+<script src="app.js?v=20260528-urdu-v1"></script>
+
+</body>
+</html>
+
+

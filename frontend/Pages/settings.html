@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Settings - AIRA</title>
+    <link rel="icon" type="image/png" href="assets/aira-logo-mark.png">
+    <link rel="stylesheet" href="style.css?v=20260614-srs-layout-v4">
+</head>
+<body class="page-settings">
+
+<header class="topbar">
+    <div class="menu-icon" onclick="toggleSidebar()">&#9776;</div>
+    <h2 class="top-title"><span class="top-logo" aria-hidden="true"><img src="assets/aira-logo-mark.png" alt=""></span><span class="top-title-text">AIRA - Artificial Intelligence Requirement Analyzer</span></h2>
+</header>
+
+<div class="layout">
+    <aside class="sidebar collapsed" id="sidebar">
+        <ul>
+            <li onclick="location.href='index.html'">Home</li>
+            <li onclick="location.href='generate-srs.html'">Generate SRS</li>
+            <li onclick="location.href='generate-uml.html'">Generate UML</li>
+            <li onclick="location.href='check-srs.html'">AI Analysis</li>
+            <li onclick="location.href='upload-uml.html'">UML Image Description</li>
+            <hr>
+            <li onclick="location.href='login.html'">Login</li>
+            <li onclick="location.href='signup.html'">Sign Up</li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <div class="settings-shell">
+            <aside class="settings-nav">
+                <button type="button" class="active" data-settings-tab="profile" data-i18n="settings.profile">Profile</button>
+                <button type="button" data-settings-tab="general" data-i18n="settings.general">General</button>
+                <button type="button" data-settings-tab="workspace" data-i18n="settings.workspace">Workspace</button>
+                <button type="button" data-settings-tab="exports" data-i18n="settings.exports">Exports</button>
+                <button type="button" data-settings-tab="premium">Premium</button>
+                <button type="button" data-settings-tab="support" data-i18n="settings.help">Help</button>
+                <button type="button" data-settings-tab="logout" data-i18n="settings.logout">Logout</button>
+            </aside>
+
+            <section class="settings-content">
+                <span class="eyebrow" data-i18n="settings.account">Account</span>
+                <h1 data-i18n="settings.title">Settings</h1>
+                <p class="description" data-i18n="settings.subtitle">Manage your account, workspace preferences, and project workflow.</p>
+
+                <section class="settings-section active" id="profile" data-settings-panel="profile">
+                    <div class="settings-section-title">
+                        <h2 data-i18n="settings.myAccount">My Account</h2>
+                    </div>
+                    <div class="account-profile-card">
+                        <div class="settings-avatar" id="settingsAccountInitials">A</div>
+                        <div>
+                            <strong id="settingsAccountName">-</strong>
+                            <small id="settingsAccountEmail">-</small>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="settings-section" id="general" data-settings-panel="general">
+                    <h2 data-i18n="settings.general">General</h2>
+                    <div class="settings-row">
+                        <div>
+                            <strong data-i18n="settings.appearance">Appearance</strong>
+                            <small data-i18n="settings.appearanceHelp">Choose the visual style for the AIRA workspace.</small>
+                        </div>
+                        <select data-setting-key="appearance">
+                            <option value="system" data-i18n="option.system">System</option>
+                            <option value="light" data-i18n="option.light">Light</option>
+                            <option value="soft" data-i18n="option.soft">Soft Contrast</option>
+                            <option value="dark" data-i18n="option.dark">Dark</option>
+                        </select>
+                    </div>
+                    <div class="settings-row">
+                        <div>
+                            <strong data-i18n="settings.language">Language</strong>
+                            <small data-i18n="settings.languageHelp">Interface language for labels and guidance.</small>
+                        </div>
+                        <select data-setting-key="language">
+                            <option value="en" data-i18n="option.english">English</option>
+                            <option value="es" data-i18n="option.spanish">Spanish</option>
+                            <option value="fr" data-i18n="option.french">French</option>
+                            <option value="de" data-i18n="option.german">German</option>
+                            <option value="ur" data-i18n="option.urdu">Urdu</option>
+                            <option value="ar">Arabic</option>
+                        </select>
+                    </div>
+                    <div class="settings-row">
+                        <div>
+                            <strong data-i18n="settings.textSize">Text size</strong>
+                            <small data-i18n="settings.textSizeHelp">Comfortable reading size for generated documents.</small>
+                        </div>
+                        <select data-setting-key="textSize">
+                            <option value="default" data-i18n="option.default">Default</option>
+                            <option value="large" data-i18n="option.large">Large</option>
+                            <option value="compact" data-i18n="option.compact">Compact</option>
+                        </select>
+                    </div>
+                    <div class="settings-actions">
+                        <span class="settings-save-status" data-settings-status="general"></span>
+                        <button class="primary-btn settings-save-btn" type="button" data-save-settings data-i18n="settings.save">Save changes</button>
+                    </div>
+                </section>
+
+                <section class="settings-section" id="workspace" data-settings-panel="workspace">
+                    <h2 data-i18n="settings.workspace">Workspace</h2>
+                    <div class="settings-row">
+                        <div>
+                            <strong data-i18n="settings.startPage">Default start page</strong>
+                            <small data-i18n="settings.startPageHelp">Page to open after login or signup.</small>
+                        </div>
+                        <select data-setting-key="startPage">
+                            <option value="history" data-i18n="nav.history">My History</option>
+                            <option value="home" data-i18n="nav.home">Home</option>
+                            <option value="srs" data-i18n="nav.generateSrs">Generate SRS</option>
+                        </select>
+                    </div>
+                    <div class="settings-row">
+                        <div>
+                            <strong data-i18n="settings.saveActivity">Save generated activity</strong>
+                            <small data-i18n="settings.saveActivityHelp">Store generated SRS, UML, and analysis records in My History.</small>
+                        </div>
+                        <label class="switch"><input type="checkbox" data-setting-key="saveActivity" checked><span></span></label>
+                    </div>
+                    <div class="settings-row">
+                        <div>
+                            <strong data-i18n="settings.reuseHistory">Reuse history items</strong>
+                            <small data-i18n="settings.reuseHistoryHelp">Allow previous prompts and outputs to be reused in new tasks.</small>
+                        </div>
+                        <label class="switch"><input type="checkbox" data-setting-key="reuseHistory" checked><span></span></label>
+                    </div>
+                    <div class="settings-actions">
+                        <span class="settings-save-status" data-settings-status="workspace"></span>
+                        <button class="primary-btn settings-save-btn" type="button" data-save-settings data-i18n="settings.save">Save changes</button>
+                    </div>
+                </section>
+
+                <section class="settings-section" id="exports" data-settings-panel="exports">
+                    <h2 data-i18n="settings.exportsTitle">Files and Exports</h2>
+                    <div class="settings-row">
+                        <div>
+                            <strong data-i18n="settings.srsFormat">SRS document format</strong>
+                            <small data-i18n="settings.srsFormatHelp">Preferred export format for generated specifications.</small>
+                        </div>
+                        <select data-setting-key="srsExport">
+                            <option value="pdf-doc">PDF / DOC</option>
+                            <option value="pdf">PDF</option>
+                            <option value="doc">DOC</option>
+                            <option value="txt">TXT</option>
+                        </select>
+                    </div>
+                    <div class="settings-row">
+                        <div>
+                            <strong data-i18n="settings.umlFormat">UML diagram export</strong>
+                            <small data-i18n="settings.umlFormatHelp">Preferred format for downloaded diagrams.</small>
+                        </div>
+                        <select data-setting-key="umlExport">
+                            <option value="png-pdf">PNG / PDF</option>
+                            <option value="png">PNG</option>
+                            <option value="pdf">PDF</option>
+                            <option value="txt">TXT</option>
+                        </select>
+                    </div>
+                    <div class="settings-row">
+                        <div>
+                            <strong data-i18n="settings.uploadPreview">Upload preview</strong>
+                            <small data-i18n="settings.uploadPreviewHelp">Show uploaded file previews before processing.</small>
+                        </div>
+                        <label class="switch"><input type="checkbox" data-setting-key="uploadPreview" checked><span></span></label>
+                    </div>
+                    <div class="settings-actions">
+                        <span class="settings-save-status" data-settings-status="exports"></span>
+                        <button class="primary-btn settings-save-btn" type="button" data-save-settings data-i18n="settings.save">Save changes</button>
+                    </div>
+                </section>
+
+                <section class="settings-section" id="support" data-settings-panel="support">
+                    <h2 data-i18n="settings.helpSupport">Help and Support</h2>
+                    <div class="settings-row clickable-row" onclick="location.href='help.html'">
+                        <div>
+                            <strong data-i18n="settings.openGuide">Open user guide</strong>
+                            <small data-i18n="settings.openGuideHelp">Learn how to generate SRS documents, UML diagrams, and analysis reports.</small>
+                        </div>
+                        <span>&rsaquo;</span>
+                    </div>
+                </section>
+
+                <section class="settings-section premium-settings-section" id="premium" data-settings-panel="premium">
+                    <div class="premium-heading">
+                        <div>
+                            <span class="eyebrow">Plans and pricing</span>
+                            <h2>Choose the access that fits your work</h2>
+                            <p>Free access is ideal for evaluation. Premium removes daily limits and unlocks professional exports, languages, and advanced workflows.</p>
+                        </div>
+                        <span class="current-plan-badge" id="currentPlanBadge">Free plan</span>
+                    </div>
+                    <div class="usage-summary" id="premiumUsageSummary"></div>
+                    <div class="pricing-grid">
+                        <article class="pricing-card">
+                            <span class="pricing-label">Free</span>
+                            <div class="pricing-price"><strong>PKR 0</strong><span>/month</span></div>
+                            <p>For trying AIRA and completing occasional tasks.</p>
+                            <ul>
+                                <li>3 SRS generations, UML generations, descriptions, and AI analyses per day</li>
+                                <li>English interface and output</li>
+                                <li>PDF export and 3 saved projects</li>
+                            </ul>
+                            <button class="primary-btn pricing-action activated-plan-btn" type="button" disabled>Activated</button>
+                        </article>
+                        <article class="pricing-card featured">
+                            <span class="pricing-label">Premium Monthly</span>
+                            <div class="pricing-price"><strong>PKR 5,500</strong><span>/month</span></div>
+                            <p class="annual-price">Flexible monthly billing with full Premium access.</p>
+                            <ul>
+                                <li>Unlimited SRS, UML, descriptions, and analyses</li>
+                                <li>Multi-language output and advanced AI review</li>
+                                <li>Professional exports, premium templates, and unlimited history</li>
+                                <li>Priority processing</li>
+                            </ul>
+                            <button class="primary-btn pricing-action" type="button" onclick="startPremiumCheckout('monthly', this)">Upgrade Monthly</button>
+                        </article>
+                        <article class="pricing-card">
+                            <span class="pricing-label">Premium Yearly</span>
+                            <div class="pricing-price"><strong>PKR 55,000</strong><span>/year</span></div>
+                            <p class="annual-price">Save PKR 11,000 compared with monthly billing.</p>
+                            <ul>
+                                <li>All Premium Monthly features</li>
+                                <li>Unlimited SRS, UML, descriptions, and analyses</li>
+                                <li>Multi-language output and professional exports</li>
+                                <li>Two months included free</li>
+                            </ul>
+                            <button class="primary-btn pricing-action" type="button" onclick="startPremiumCheckout('yearly', this)">Upgrade Yearly</button>
+                        </article>
+                    </div>
+                    <p class="checkout-status" id="checkoutStatus" aria-live="polite"></p>
+                    <button class="secondary-btn manage-billing-btn" id="manageBillingButton" type="button" onclick="openBillingPortal(this)" hidden>Manage billing</button>
+                    <div class="billing-policy">
+                        <h3>Billing policy</h3>
+                        <div class="billing-policy-grid">
+                            <p><strong>Activation</strong><span>Premium access activates automatically after successful secure checkout.</span></p>
+                            <p><strong>Plan period</strong><span>Choose monthly or annual recurring billing. The yearly plan includes two months free.</span></p>
+                            <p><strong>Renewal</strong><span>Your subscription renews automatically until it is cancelled.</span></p>
+                            <p><strong>Admin access</strong><span>Administrator accounts are never charged and have no usage limits.</span></p>
+                        </div>
+                    </div>
+                    <div class="admin-access-manager" id="adminAccessManager" hidden>
+                        <div>
+                            <span class="eyebrow">Admin controls</span>
+                            <h3>Account Access Management</h3>
+                            <p>Assign Free, Premium, or Admin access to an existing registered account.</p>
+                        </div>
+                        <div class="admin-access-form">
+                            <label>
+                                <span>Registered user email</span>
+                                <input id="accessTargetEmail" type="email" placeholder="user@example.com">
+                            </label>
+                            <label>
+                                <span>Access level</span>
+                                <select id="accessTargetPlan">
+                                    <option value="free">Free</option>
+                                    <option value="premium">Premium</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                            </label>
+                            <button class="primary-btn" type="button" onclick="updateAccountAccess()">Update access</button>
+                        </div>
+                        <p class="access-management-status" id="accessManagementStatus" aria-live="polite"></p>
+                    </div>
+                </section>
+
+                <section class="settings-section" id="logout" data-settings-panel="logout">
+                    <h2 data-i18n="settings.logout">Logout</h2>
+                    <div class="settings-row">
+                        <div>
+                            <strong data-i18n="settings.loggedIn">Logged in on this browser</strong>
+                            <small data-i18n="settings.logoutHelp">Use logout before leaving a shared computer.</small>
+                        </div>
+                        <button class="secondary-btn danger-btn" type="button" onclick="logoutUser()" data-i18n="settings.logoutAction">Log out</button>
+                    </div>
+                </section>
+            </section>
+        </div>
+    </main>
+</div>
+
+<footer class="footer">
+    Final Year Project - AIRA
+</footer>
+
+<script src="app.js?v=20260615-pricing-v2"></script>
+
+</body>
+</html>

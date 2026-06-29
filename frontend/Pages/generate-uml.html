@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Generate UML - AIRA</title>
+    <link rel="icon" type="image/png" href="assets/aira-logo-mark.png">
+    <link rel="stylesheet" href="style.css?v=20260628-source-only-v1">
+</head>
+
+<body class="page-generate-uml">
+
+<header class="topbar">
+    <div class="menu-icon" onclick="toggleSidebar()">&#9776;</div>
+    <h2 class="top-title"><span class="top-logo" aria-hidden="true"><img src="assets/aira-logo-mark.png" alt=""></span><span class="top-title-text">AIRA - Artificial Intelligence Requirement Analyzer</span></h2>
+</header>
+
+<div class="layout">
+    <aside class="sidebar collapsed" id="sidebar">
+        <ul>
+            <li onclick="location.href='index.html'">Home</li>
+            <li onclick="location.href='generate-srs.html'">Generate SRS</li>
+            <li class="active">Generate UML</li>
+            <li onclick="location.href='check-srs.html'">AI Analysis</li>
+            <li onclick="location.href='upload-uml.html'">UML Image Description</li>
+            <hr>
+            <li onclick="location.href='history.html'">My History</li>
+            <li onclick="location.href='login.html'">Login</li>
+            <li onclick="location.href='signup.html'">Sign Up</li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <div class="form-card">
+            <span class="eyebrow">Diagram Workspace</span>
+            <h1>Generate UML Diagram</h1>
+            <p>
+                Provide your system description or upload an SRS document.
+                AIRA will generate a professional UML diagram that you can download or refine from source.
+            </p>
+
+            <label>Select UML Diagram Type</label>
+            <select id="umlType">
+                <option value="usecase">Use Case Diagram</option>
+                <option value="class">Class Diagram</option>
+                <option value="sequence">Sequence Diagram</option>
+                <option value="erd">ERD Diagram</option>
+                <option value="activity">Activity Diagram</option>
+            </select>
+
+            <label>System Description or Upload File</label>
+            <div class="input-shell">
+                <textarea
+                    id="promptInput"
+                    rows="6"
+                    placeholder="Write your system description, workflow, or modeling request here..."
+                ></textarea>
+
+                <div id="umlInlinePreview" class="inline-preview"></div>
+            </div>
+
+            <div class="attach-wrapper">
+                <input type="file" id="fileUpload" accept=".pdf,.doc,.docx,.txt,.airauml,.json,image/png,image/jpeg,image/webp,image/svg+xml" hidden>
+
+                <button
+                    type="button"
+                    class="attach-btn"
+                    onclick="openUmlSourceFilePicker()"
+                >
+                    <img src="./Screenshots/clip.png" alt="Attach">
+                    Attach File / Diagram Input
+                </button>
+            </div>
+
+            <button class="primary-btn" onclick="sendUMLPrompt()">
+                Generate UML Diagram
+            </button>
+            <div class="access-inline-message" data-access-message="uml_generation" hidden></div>
+
+            <div class="output-box" id="umlOutputBox" style="display:none;">
+                <h3>Generated UML Preview</h3>
+                <section class="plantuml-preview" id="plantUmlPreview" hidden>
+                    <div class="plantuml-preview-stage" id="plantUmlPreviewStage"></div>
+                    <p class="plantuml-preview-status" id="plantUmlPreviewStatus"></p>
+                    <div class="plantuml-source-editor" id="plantUmlSourceEditor" hidden>
+                        <label for="plantUmlSourceText">Edit PlantUML Source</label>
+                        <textarea id="plantUmlSourceText" spellcheck="false"></textarea>
+                        <div class="plantuml-source-actions">
+                            <button type="button" class="secondary-btn" onclick="togglePlantUmlSourceEditor(false)">Cancel</button>
+                            <button type="button" class="primary-btn" onclick="applyPlantUmlSourceEdit()">Apply Changes</button>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="diagram-workspace" id="diagramWorkspace" hidden>
+                    <div class="diagram-toolbar" aria-label="Diagram editing tools">
+                        <div class="tool-group">
+                            <span>General</span>
+                            <button type="button" class="tool-btn active" draggable="true" ondragstart="dragDiagramTool(event, 'select')" onclick="selectDiagramTool('select', this)">Select</button>
+                            <button type="button" class="tool-btn" onclick="undoDiagramChange()" title="Undo (Ctrl+Z)">Undo</button>
+                            <button type="button" class="tool-btn danger-tool" onclick="deleteSelectedDiagramNode()">Delete</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'connector')" onclick="selectDiagramTool('connector', this)">Connector</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'text')" onclick="selectDiagramTool('text', this)">Text</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'note')" onclick="selectDiagramTool('note', this)">Note</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'frame')" onclick="selectDiagramTool('frame', this)">Frame</button>
+                        </div>
+
+                        <div class="tool-group">
+                            <span>Use Case</span>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'actor')" onclick="selectDiagramTool('actor', this)">Actor</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'usecase')" onclick="selectDiagramTool('usecase', this)">Use Case</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'system-boundary')" onclick="selectDiagramTool('system-boundary', this)">Boundary</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'include')" onclick="selectDiagramTool('include', this)">Include</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'extend')" onclick="selectDiagramTool('extend', this)">Extend</button>
+                        </div>
+
+                        <div class="tool-group">
+                            <span>Class</span>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'class')" onclick="selectDiagramTool('class', this)">Class</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'interface')" onclick="selectDiagramTool('interface', this)">Interface</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'package')" onclick="selectDiagramTool('package', this)">Package</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'association')" onclick="selectDiagramTool('association', this)">Association</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'dependency')" onclick="selectDiagramTool('dependency', this)">Dependency</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'inheritance')" onclick="selectDiagramTool('inheritance', this)">Inheritance</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'aggregation')" onclick="selectDiagramTool('aggregation', this)">Aggregation</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'composition')" onclick="selectDiagramTool('composition', this)">Composition</button>
+                        </div>
+
+                        <div class="tool-group">
+                            <span>Sequence</span>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'lifeline')" onclick="selectDiagramTool('lifeline', this)">Lifeline</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'activation')" onclick="selectDiagramTool('activation', this)">Activation</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'message')" onclick="selectDiagramTool('message', this)">Message</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'return-message')" onclick="selectDiagramTool('return-message', this)">Return</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'alt-fragment')" onclick="selectDiagramTool('alt-fragment', this)">Alt</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'loop-fragment')" onclick="selectDiagramTool('loop-fragment', this)">Loop</button>
+                        </div>
+
+                        <div class="tool-group">
+                            <span>Activity</span>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'start-node')" onclick="selectDiagramTool('start-node', this)">Start</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'action')" onclick="selectDiagramTool('action', this)">Action</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'decision')" onclick="selectDiagramTool('decision', this)">Decision</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'fork-join')" onclick="selectDiagramTool('fork-join', this)">Fork/Join</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'swimlane')" onclick="selectDiagramTool('swimlane', this)">Swimlane</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'merge')" onclick="selectDiagramTool('merge', this)">Merge</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'object-node')" onclick="selectDiagramTool('object-node', this)">Object</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'end-node')" onclick="selectDiagramTool('end-node', this)">End</button>
+                        </div>
+
+                        <div class="tool-group">
+                            <span>ERD</span>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'entity')" onclick="selectDiagramTool('entity', this)">Entity</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'table')" onclick="selectDiagramTool('table', this)">Table</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'primary-key')" onclick="selectDiagramTool('primary-key', this)">PK</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'foreign-key')" onclick="selectDiagramTool('foreign-key', this)">FK</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'attribute')" onclick="selectDiagramTool('attribute', this)">Attribute</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'relationship')" onclick="selectDiagramTool('relationship', this)">Relationship</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'weak-entity')" onclick="selectDiagramTool('weak-entity', this)">Weak Entity</button>
+                            <button type="button" class="tool-btn" draggable="true" ondragstart="dragDiagramTool(event, 'cardinality')" onclick="selectDiagramTool('cardinality', this)">Cardinality</button>
+                        </div>
+                    </div>
+
+                    <div
+                        class="diagram-editor"
+                        id="diagramEditor"
+                        onclick="addDiagramElement(event)"
+                        ondragover="allowDiagramDrop(event)"
+                        ondrop="dropDiagramTool(event)"
+                    >
+                        <svg class="diagram-connectors" id="diagramConnectors"></svg>
+                    </div>
+
+                    <div class="diagram-context-menu" id="diagramContextMenu">
+                        <button type="button" onclick="editSelectedDiagramNode()">Edit</button>
+                        <button type="button" onclick="duplicateSelectedDiagramNode()">Duplicate</button>
+                        <button type="button" onclick="bringSelectedDiagramNodeFront()">Bring to Front</button>
+                        <button type="button" class="danger-option" onclick="deleteSelectedDiagramNode()">Delete</button>
+                    </div>
+                </div>
+
+                <div class="output-content" id="umlOutputContent">
+                </div>
+
+                <div class="output-actions">
+                    <button type="button" class="secondary-btn" id="plantUmlSourceEditButton" onclick="togglePlantUmlSourceEditor(true)" hidden>Edit Source</button>
+                    <button type="button" class="secondary-btn" onclick="downloadDiagramWithFilePicker()">Download</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<footer class="footer">
+    Final Year Project - AIRA
+</footer>
+
+<script src="app.js?v=20260628-plantuml-source-only-v1"></script>
+
+</body>
+</html>
+
+

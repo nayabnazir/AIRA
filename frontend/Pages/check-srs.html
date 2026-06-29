@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>AI Analysis - AIRA</title>
+    <link rel="icon" type="image/png" href="assets/aira-logo-mark.png">
+    <link rel="stylesheet" href="style.css?v=20260614-srs-layout-v4">
+</head>
+
+<body>
+
+<header class="topbar">
+    <div class="menu-icon" onclick="toggleSidebar()">&#9776;</div>
+    <h2 class="top-title"><span class="top-logo" aria-hidden="true"><img src="assets/aira-logo-mark.png" alt=""></span><span class="top-title-text">AIRA - Artificial Intelligence Requirement Analyzer</span></h2>
+</header>
+
+<div class="layout">
+    <aside class="sidebar collapsed" id="sidebar">
+        <ul>
+            <li onclick="location.href='index.html'">Home</li>
+            <li onclick="location.href='generate-srs.html'">Generate SRS</li>
+            <li onclick="location.href='generate-uml.html'">Generate UML</li>
+            <li class="active">AI Analysis</li>
+            <li onclick="location.href='upload-uml.html'">UML Image Description</li>
+            <hr>
+            <li onclick="location.href='history.html'">My History</li>
+            <li onclick="location.href='login.html'">Login</li>
+            <li onclick="location.href='signup.html'">Sign Up</li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <div class="form-card">
+            <span class="eyebrow">Requirement Review</span>
+            <h1>AI Analysis</h1>
+            <p id="analysisIntro">
+                Upload an SRS document. AIRA will review its requirements and identify
+                ambiguous or unclear statements with recommended corrections.
+            </p>
+
+            <label id="analysisFileLabel">Upload SRS Document</label>
+            <div class="input-shell">
+                <textarea
+                    id="analysisTextInput"
+                    rows="5"
+                    placeholder="Optional: paste SRS text here if you do not want to upload a file..."
+                ></textarea>
+
+                <div id="srsInlinePreview" class="inline-preview inline-preview-text"></div>
+            </div>
+
+            <div class="attach-wrapper">
+                <input
+                    type="file"
+                    id="srsFile"
+                    accept=".pdf,.doc,.docx,.txt"
+                    hidden
+                >
+
+                <button
+                    type="button"
+                    class="attach-btn"
+                    onclick="openSrsAnalysisFilePicker()"
+                >
+                    <img src="./Screenshots/clip.png" alt="Attach">
+                    <span id="analysisAttachText">Attach SRS File</span>
+                </button>
+            </div>
+
+            <p class="helper-text" id="analysisHelperText">Supported formats: PDF, DOC, DOCX, TXT</p>
+
+            <button class="primary-btn" id="analysisSubmitBtn" onclick="checkAmbiguity()">Check Ambiguity</button>
+            <div class="access-inline-message" data-access-message="ai_analysis" hidden></div>
+
+            <div class="output-box" id="resultBox" style="display:none;">
+                <h3 id="analysisResultTitle">Ambiguity Analysis Preview</h3>
+                <div class="output-content" id="ambiguityOutputContent" contenteditable="false">
+                    <ul id="ambiguityList"></ul>
+                </div>
+                <div class="output-actions">
+                    <button type="button" class="secondary-btn" onclick="toggleOutputEdit('ambiguityOutputContent', this)">Edit</button>
+                    <button type="button" class="secondary-btn" onclick="downloadProfessionalAnalysis('ambiguityOutputContent', 'pdf', 'aira-srs-analysis')">PDF</button>
+                    <button type="button" class="secondary-btn" onclick="downloadProfessionalAnalysis('ambiguityOutputContent', 'doc', 'aira-srs-analysis')">Word</button>
+                    <button type="button" class="secondary-btn" onclick="downloadProfessionalAnalysis('ambiguityOutputContent', 'txt', 'aira-srs-analysis')">TXT</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<footer class="footer">
+    Final Year Project - AIRA
+</footer>
+
+<script src="app.js?v=20260615-pricing-v1"></script>
+
+</body>
+</html>
+
+

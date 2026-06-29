@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Generate SRS - AIRA</title>
+    <link rel="icon" type="image/png" href="assets/aira-logo-mark.png">
+    <link rel="stylesheet" href="style.css?v=20260614-srs-weather-v6">
+</head>
+<body class="page-generate-srs">
+
+<header class="topbar">
+    <div class="menu-icon" onclick="toggleSidebar()">&#9776;</div>
+    <h2 class="top-title"><span class="top-logo" aria-hidden="true"><img src="assets/aira-logo-mark.png" alt=""></span><span class="top-title-text">AIRA - Artificial Intelligence Requirement Analyzer</span></h2>
+</header>
+
+<div class="layout">
+    <aside class="sidebar collapsed" id="sidebar">
+        <ul>
+            <li onclick="location.href='index.html'">Home</li>
+            <li class="active">Generate SRS</li>
+            <li onclick="location.href='generate-uml.html'">Generate UML</li>
+            <li onclick="location.href='check-srs.html'">AI Analysis</li>
+            <li onclick="location.href='upload-uml.html'">UML Image Description</li>
+            <hr>
+            <li onclick="location.href='history.html'">My History</li>
+            <li onclick="location.href='login.html'">Login</li>
+            <li onclick="location.href='signup.html'">Sign Up</li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <div class="form-card">
+            <span class="eyebrow" data-i18n="srs.eyebrow">Specification Builder</span>
+            <h1 data-i18n="srs.title">Generate Software Requirement Specification</h1>
+            <p class="description" data-i18n="srs.description">
+                Start with a short idea, a reference document, or a UML diagram image.
+                Add extra details when they are available.
+            </p>
+
+            <input id="srsProjectTitle" type="hidden">
+            <label for="srsPromptInput">Project Topic</label>
+            <div class="input-shell">
+                <textarea
+                    id="srsPromptInput"
+                    rows="4"
+                    placeholder="e.g. Weather Forecasting System"
+                ></textarea>
+            </div>
+
+            <section class="srs-source-card unified-upload-card">
+                <h3 data-i18n="srs.uploadTitle">Upload Source File</h3>
+                <p data-i18n="srs.uploadText">Upload one UML image, PDF, Word document, text file, or supporting project file for this SRS.</p>
+                <input
+                    type="file"
+                    id="generateSrsFiles"
+                    accept=".pdf,.doc,.docx,.txt,.png,.jpg,.jpeg,.webp,.svg,image/*"
+                    hidden
+                >
+                <button
+                    type="button"
+                    class="attach-btn"
+                    onclick="document.getElementById('generateSrsFiles').click()"
+                >
+                    <img src="./Screenshots/clip.png" alt="Attach">
+                    <span data-i18n="srs.uploadButton">Upload File</span>
+                </button>
+                <div id="generateSrsFilesPreview" class="inline-preview inline-preview-static source-file-preview"></div>
+            </section>
+
+            <details class="advanced-srs-panel">
+                <summary>Optional customization</summary>
+
+                <div class="quick-form-grid quick-form-grid-single">
+                    <div>
+                        <label data-i18n="srs.detailLevel">Output Detail Level</label>
+                        <select id="srsDetailLevel">
+                            <option>Detailed</option>
+                            <option>Standard</option>
+                            <option>Short</option>
+                        </select>
+                    </div>
+                </div>
+
+                <label data-i18n="srs.actors">Main Users / Actors</label>
+                <input id="srsActors" type="text" placeholder="e.g. Student, Admin, Librarian" data-i18n-placeholder="srs.actorsPlaceholder">
+
+                <label data-i18n="srs.dataManaged">Data Managed</label>
+                <input id="srsDataManaged" type="text" placeholder="e.g. Users, books, borrowing records, reports" data-i18n-placeholder="srs.dataManagedPlaceholder">
+            </details>
+
+            <div class="attach-wrapper srs-primary-action">
+                <button class="primary-btn" onclick="generateSRSPreview()" data-i18n="srs.generate">Generate SRS</button>
+            </div>
+            <div class="access-inline-message" data-access-message="srs_generation" hidden></div>
+
+            <div class="output-box" id="srsOutputBox" style="display:none;">
+                <h3 data-i18n="srs.outputTitle">Generated SRS Preview</h3>
+                <div class="srs-download-ribbon" aria-label="SRS download formatting menu">
+                    <div class="ribbon-group ribbon-download">
+                        <div class="ribbon-row ribbon-download-row">
+                            <button type="button" class="ribbon-file-btn" onclick="downloadSrsFromRibbon('pdf')" title="Download PDF">
+                                <strong>PDF</strong>
+                                <span>PDF</span>
+                            </button>
+                            <button type="button" class="ribbon-file-btn" onclick="downloadSrsFromRibbon('doc')" title="Download DOC">
+                                <strong>DOC</strong>
+                                <span>Word</span>
+                            </button>
+                            <button type="button" class="ribbon-file-btn" onclick="downloadSrsFromRibbon('txt')" title="Download TXT">
+                                <strong>TXT</strong>
+                                <span>Text</span>
+                            </button>
+                        </div>
+                        <small>Download</small>
+                    </div>
+
+                    <div class="ribbon-group ribbon-font">
+                        <div class="ribbon-row">
+                            <select id="srsRibbonFont" onchange="applySrsRibbonFormat()">
+                                <option value="Aptos">Aptos (Body)</option>
+                                <option value="Cambria">Cambria</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Garamond">Garamond</option>
+                                <option value="Times New Roman">Times New Roman</option>
+                                <option value="Arial">Arial</option>
+                                <option value="Calibri">Calibri</option>
+                                <option value="Verdana">Verdana</option>
+                                <option value="Tahoma">Tahoma</option>
+                                <option value="Courier New">Courier New</option>
+                            </select>
+                            <select id="srsRibbonSize" onchange="applySrsRibbonFormat()">
+                                <option>10</option>
+                                <option>11</option>
+                                <option selected>12</option>
+                                <option>14</option>
+                                <option>16</option>
+                            </select>
+                        </div>
+                        <div class="ribbon-row ribbon-tools">
+                            <button type="button" onclick="formatSrsSelection('bold')" title="Bold"><b>B</b></button>
+                            <button type="button" onclick="formatSrsSelection('italic')" title="Italic"><i>I</i></button>
+                            <button type="button" onclick="formatSrsSelection('underline')" title="Underline"><u>U</u></button>
+                            <button type="button" onclick="formatSrsSelection('strikeThrough')" title="Strikethrough"><s>ab</s></button>
+                            <button type="button" onclick="formatSrsSelection('removeFormat')" title="Clear formatting">A</button>
+                            <div class="font-color-palette inline" id="srsFontColorPalette" title="Font color palette">
+                                <button type="button" style="--swatch:#112033" onclick="applySrsFontColor('#112033')" aria-label="Black"></button>
+                                <button type="button" style="--swatch:#0f4c81" onclick="applySrsFontColor('#0f4c81')" aria-label="Blue"></button>
+                                <button type="button" style="--swatch:#0f766e" onclick="applySrsFontColor('#0f766e')" aria-label="Teal"></button>
+                                <button type="button" style="--swatch:#b42318" onclick="applySrsFontColor('#b42318')" aria-label="Red"></button>
+                                <button type="button" style="--swatch:#6d28d9" onclick="applySrsFontColor('#6d28d9')" aria-label="Purple"></button>
+                                <label aria-label="Custom font color">
+                                    <span>A</span>
+                                    <input type="color" value="#112033" onchange="applySrsFontColor(this.value)">
+                                </label>
+                            </div>
+                        </div>
+                        <small>Font</small>
+                    </div>
+
+                    <div class="ribbon-group ribbon-paragraph">
+                        <div class="ribbon-row ribbon-tools ribbon-paragraph-top">
+                            <button type="button" onclick="formatSrsSelection('insertUnorderedList')" title="Bullets"><span class="icon-list-bullets"></span></button>
+                            <button type="button" onclick="applySrsListStyle('decimal')" title="Numbering"><span class="icon-list-number"></span></button>
+                            <button type="button" onclick="applySrsListStyle('upper-alpha')" title="Alphabetical list"><span class="icon-list-alpha"></span></button>
+                            <button type="button" onclick="applySrsListStyle('upper-roman')" title="Roman list"><span class="icon-list-roman"></span></button>
+                        </div>
+                        <div class="ribbon-row ribbon-tools ribbon-paragraph-bottom">
+                            <button type="button" class="active" onclick="formatSrsSelection('justifyLeft')" title="Align left"><span class="icon-align-left"></span></button>
+                            <button type="button" onclick="formatSrsSelection('justifyCenter')" title="Center"><span class="icon-align-center"></span></button>
+                            <button type="button" onclick="formatSrsSelection('justifyRight')" title="Align right"><span class="icon-align-right"></span></button>
+                            <button type="button" onclick="formatSrsSelection('justifyFull')" title="Justify"><span class="icon-align-justify"></span></button>
+                        </div>
+                        <small>Paragraph</small>
+                    </div>
+
+                    <div class="ribbon-group ribbon-styles">
+                        <div class="style-tile active" role="button" tabindex="0" data-style-name="normal" onclick="applySrsStyle('normal')" oncontextmenu="openSrsStyleModifyMenu(event, 'normal')">
+                            <strong>AaBbCc</strong>
+                            <span>Normal</span>
+                            <em onclick="event.stopPropagation(); openSrsStyleModifyDialogFor('normal')">Modify</em>
+                        </div>
+                        <div class="style-tile" role="button" tabindex="0" data-style-name="heading" onclick="applySrsStyle('heading')" oncontextmenu="openSrsStyleModifyMenu(event, 'heading')">
+                            <strong>AaBb</strong>
+                            <span>Heading</span>
+                            <em onclick="event.stopPropagation(); openSrsStyleModifyDialogFor('heading')">Modify</em>
+                        </div>
+                        <div class="style-tile" role="button" tabindex="0" data-style-name="title" onclick="applySrsStyle('title')" oncontextmenu="openSrsStyleModifyMenu(event, 'title')">
+                            <strong>AaB</strong>
+                            <span>Title</span>
+                            <em onclick="event.stopPropagation(); openSrsStyleModifyDialogFor('title')">Modify</em>
+                        </div>
+                        <small>Styles</small>
+                    </div>
+                </div>
+                <div class="srs-style-context-menu" id="srsStyleContextMenu">
+                    <button type="button" onclick="openSrsStyleModifyDialog()">Modify</button>
+                </div>
+                <div class="srs-style-modal" id="srsStyleModifyModal" aria-hidden="true">
+                    <div class="srs-style-modal-card">
+                        <h4>Modify Style</h4>
+                        <div class="style-modal-grid">
+                            <label>
+                                Font
+                                <select id="styleModifyFont">
+                                    <option value="Aptos">Aptos</option>
+                                    <option value="Cambria">Cambria</option>
+                                    <option value="Georgia">Georgia</option>
+                                    <option value="Garamond">Garamond</option>
+                                    <option value="Times New Roman">Times New Roman</option>
+                                    <option value="Arial">Arial</option>
+                                    <option value="Calibri">Calibri</option>
+                                    <option value="Verdana">Verdana</option>
+                                    <option value="Tahoma">Tahoma</option>
+                                </select>
+                            </label>
+                            <label>
+                                Size
+                                <select id="styleModifySize">
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option selected>12</option>
+                                    <option>14</option>
+                                    <option>16</option>
+                                    <option>18</option>
+                                    <option>22</option>
+                                </select>
+                            </label>
+                            <label>
+                                Color
+                                <input id="styleModifyColor" type="color" value="#112033">
+                            </label>
+                        </div>
+                        <div class="style-modal-checks">
+                            <label><input id="styleModifyBold" type="checkbox"> Bold</label>
+                            <label><input id="styleModifyItalic" type="checkbox"> Italic</label>
+                            <label><input id="styleModifyUnderline" type="checkbox"> Underline</label>
+                        </div>
+                        <div class="style-modal-actions">
+                            <button type="button" class="secondary-btn" onclick="closeSrsStyleModifyDialog()">Cancel</button>
+                            <button type="button" class="primary-btn" onclick="applySrsStyleModification()">Apply</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="srs-floating-toolbar" id="srsFloatingToolbar" aria-label="Quick SRS formatting toolbar">
+                    <select id="srsMiniFont" onchange="syncMiniSrsFont()">
+                        <option value="Aptos">Aptos</option>
+                        <option value="Cambria">Cambria</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Garamond">Garamond</option>
+                        <option value="Times New Roman">Times</option>
+                        <option value="Arial">Arial</option>
+                        <option value="Calibri">Calibri</option>
+                        <option value="Verdana">Verdana</option>
+                        <option value="Tahoma">Tahoma</option>
+                    </select>
+                    <button type="button" onclick="formatSrsSelection('bold')" title="Bold"><b>B</b></button>
+                    <button type="button" onclick="formatSrsSelection('italic')" title="Italic"><i>I</i></button>
+                    <button type="button" onclick="formatSrsSelection('underline')" title="Underline"><u>U</u></button>
+                    <label class="mini-color-tool" title="Shading color">
+                        <span>◩</span>
+                        <input type="color" value="#fff1a8" onchange="highlightSrsSelection(this.value)">
+                    </label>
+                    <button type="button" onclick="clearSrsShading()" title="Remove shading">◫</button>
+                    <button type="button" onclick="applySrsBorder()" title="Border">□</button>
+                    <button type="button" onclick="formatSrsSelection('justifyLeft')" title="Align left">☰</button>
+                    <button type="button" onclick="formatSrsSelection('insertUnorderedList')" title="Bullets">☷</button>
+                </div>
+                <div class="output-content" id="srsOutputContent" contenteditable="false">
+                    <em data-i18n="srs.outputPlaceholder">The generated SRS content will be displayed here.</em>
+                </div>
+                <div class="output-actions">
+                    <button type="button" class="secondary-btn" onclick="toggleOutputEdit('srsOutputContent', this)" data-i18n="common.edit">Edit</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<footer class="footer">
+    Final Year Project - AIRA
+</footer>
+
+<script src="app.js?v=20260615-pricing-v1"></script>
+
+</body>
+</html>
+
+

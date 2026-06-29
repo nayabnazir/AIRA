@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>UML Image Description - AIRA</title>
+    <link rel="icon" type="image/png" href="assets/aira-logo-mark.png">
+    <link rel="stylesheet" href="style.css?v=20260614-srs-layout-v4">
+</head>
+
+<body>
+
+<header class="topbar">
+    <div class="menu-icon" onclick="toggleSidebar()">&#9776;</div>
+    <h2 class="top-title"><span class="top-logo" aria-hidden="true"><img src="assets/aira-logo-mark.png" alt=""></span><span class="top-title-text">AIRA - Artificial Intelligence Requirement Analyzer</span></h2>
+</header>
+
+<div class="layout">
+    <aside class="sidebar collapsed" id="sidebar">
+        <ul>
+            <li onclick="location.href='index.html'">Home</li>
+            <li onclick="location.href='generate-srs.html'">Generate SRS</li>
+            <li onclick="location.href='generate-uml.html'">Generate UML</li>
+            <li onclick="location.href='check-srs.html'">AI Analysis</li>
+            <li class="active">UML Image Description</li>
+            <hr>
+            <li onclick="location.href='history.html'">My History</li>
+            <li onclick="location.href='login.html'">Login</li>
+            <li onclick="location.href='signup.html'">Sign Up</li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <div class="form-card">
+            <span class="eyebrow">Visual Interpretation</span>
+            <h1>UML Image Description</h1>
+            <p>
+                Upload a UML diagram image or an editable AIRA diagram. The system will identify
+                its type and generate a detailed, diagram-specific description.
+            </p>
+
+            <label>Upload UML Diagram Image</label>
+            <div id="inlineImagePreview" class="inline-preview uml-image-only-preview"></div>
+
+            <div class="attach-wrapper">
+                <input
+                    type="file"
+                    id="umlImageUpload"
+                    accept=".png,.jpg,.jpeg,.webp,.bmp,.svg,.airauml,.json"
+                    hidden
+                >
+
+                <button
+                    type="button"
+                    class="attach-btn"
+                    onclick="document.getElementById('umlImageUpload').click()"
+                >
+                    <img src="./Screenshots/clip.png" alt="Attach">
+                    Attach Diagram
+                </button>
+            </div>
+
+            <p class="helper-text" id="umlPasteStatus">Supported formats: PNG, JPG, JPEG, WEBP, BMP, SVG, AIRA UML, JSON. Copy a diagram and press Ctrl + V anywhere on this page to paste it directly.</p>
+
+            <button class="primary-btn" onclick="analyzeUMLImage()">
+                Analyze UML Image
+            </button>
+            <div class="access-inline-message" data-access-message="uml_analysis" hidden></div>
+
+            <div class="output-box" id="umlImageDescriptionBox" style="display:none;">
+                <h3>Generated Description Preview</h3>
+                <div class="output-content" id="umlImageDescriptionContent" contenteditable="false">
+                    <p><em>The UML image description will appear here.</em></p>
+                </div>
+                <div class="output-actions">
+                    <button type="button" class="secondary-btn" onclick="toggleOutputEdit('umlImageDescriptionContent', this)">Edit</button>
+                    <button type="button" class="secondary-btn" onclick="downloadProfessionalAnalysis('umlImageDescriptionContent', 'pdf', 'aira-uml-image-description')">PDF</button>
+                    <button type="button" class="secondary-btn" onclick="downloadProfessionalAnalysis('umlImageDescriptionContent', 'doc', 'aira-uml-image-description')">Word</button>
+                    <button type="button" class="secondary-btn" onclick="downloadProfessionalAnalysis('umlImageDescriptionContent', 'txt', 'aira-uml-image-description')">TXT</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<footer class="footer">
+    Final Year Project - AIRA
+</footer>
+
+<script src="app.js?v=20260615-pricing-v1"></script>
+
+</body>
+</html>
+
+

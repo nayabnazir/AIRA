@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Help - AIRA</title>
+    <link rel="icon" type="image/png" href="assets/aira-logo-mark.png">
+    <link rel="stylesheet" href="style.css?v=20260614-srs-layout-v4">
+</head>
+<body>
+
+<header class="topbar">
+    <div class="menu-icon" onclick="toggleSidebar()">&#9776;</div>
+    <h2 class="top-title"><span class="top-logo" aria-hidden="true"><img src="assets/aira-logo-mark.png" alt=""></span><span class="top-title-text">AIRA - Artificial Intelligence Requirement Analyzer</span></h2>
+</header>
+
+<div class="layout">
+    <aside class="sidebar collapsed" id="sidebar">
+        <ul>
+            <li onclick="location.href='index.html'">Home</li>
+            <li onclick="location.href='generate-srs.html'">Generate SRS</li>
+            <li onclick="location.href='generate-uml.html'">Generate UML</li>
+            <li onclick="location.href='check-srs.html'">AI Analysis</li>
+            <li onclick="location.href='upload-uml.html'">UML Image Description</li>
+            <hr>
+            <li onclick="location.href='login.html'">Login</li>
+            <li onclick="location.href='signup.html'">Sign Up</li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <div class="form-card help-card">
+            <span class="eyebrow">User Guide</span>
+            <h1>How to Use AIRA</h1>
+            <p class="description">Use these steps when you are new to the system.</p>
+
+            <div class="help-grid">
+                <section class="help-step">
+                    <strong>1</strong>
+                    <h3>Create or login to your account</h3>
+                    <p>Signup first, then login so AIRA can save your generated work in My History.</p>
+                </section>
+
+                <section class="help-step">
+                    <strong>2</strong>
+                    <h3>Generate SRS</h3>
+                    <p>Open Generate SRS, enter a project title and idea, or upload a source file, then generate the document.</p>
+                </section>
+
+                <section class="help-step">
+                    <strong>3</strong>
+                    <h3>Generate UML</h3>
+                    <p>Open Generate UML, describe your system, choose a diagram type, then edit the diagram if needed.</p>
+                </section>
+
+                <section class="help-step">
+                    <strong>4</strong>
+                    <h3>Check SRS quality</h3>
+                    <p>Open AI Analysis, paste or upload SRS text, and review ambiguity or improvement suggestions.</p>
+                </section>
+
+                <section class="help-step">
+                    <strong>5</strong>
+                    <h3>Describe UML images</h3>
+                    <p>Open UML Image Description, upload a UML image, and AIRA will extract and explain the diagram.</p>
+                </section>
+
+                <section class="help-step">
+                    <strong>6</strong>
+                    <h3>Reuse saved work</h3>
+                    <p>Open My History to view previous activity and reuse generated content in another tool.</p>
+                </section>
+            </div>
+        </div>
+    </main>
+</div>
+
+<footer class="footer">
+    Final Year Project - AIRA
+</footer>
+
+<script src="app.js?v=20260528-urdu-v1"></script>
+
+</body>
+</html>

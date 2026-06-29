@@ -1,0 +1,49 @@
+{
+  "model": "logistic_regression_tfidf",
+  "dataset_rows": 6805,
+  "train_rows": 5453,
+  "test_rows": 1361,
+  "metrics": {
+    "accuracy": 0.8030859662013226,
+    "ambiguous_f1": 0.46825396825396826,
+    "confusion_matrix": [
+      [
+        975,
+        173
+      ],
+      [
+        95,
+        118
+      ]
+    ],
+    "classification_report": {
+      "clear": {
+        "precision": 0.9112149532710281,
+        "recall": 0.8493031358885017,
+        "f1-score": 0.8791704238052299,
+        "support": 1148.0
+      },
+      "ambiguous": {
+        "precision": 0.4054982817869416,
+        "recall": 0.5539906103286385,
+        "f1-score": 0.46825396825396826,
+        "support": 213.0
+      },
+      "accuracy": 0.8030859662013226,
+      "macro avg": {
+        "precision": 0.6583566175289848,
+        "recall": 0.7016468731085701,
+        "f1-score": 0.6737121960295991,
+        "support": 1361.0
+      },
+      "weighted avg": {
+        "precision": 0.8320689936633053,
+        "recall": 0.8030859662013226,
+        "f1-score": 0.8148609417828796,
+        "support": 1361.0
+      }
+    }
+  },
+  "saved_model": "E:\\New folder\\FYP\\AI_SRS_UML_Project\\AIRA_ML\\srs_ambiguity_pipeline.joblib",
+  "backend_model_copy": "E:\\New folder\\FYP\\AI_SRS_UML_Project\\backend\\aira-ai\\models\\srs_ambiguity_pipeline.joblib"
+}

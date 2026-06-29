@@ -1,0 +1,35 @@
+{
+  "dataset": "E:\\New folder\\FYP\\AI_SRS_UML_Project\\AIRA_ML\\software_requirements_extended.csv",
+  "rows": 975,
+  "categories": {
+    "Functional": 588,
+    "Non-Functional": 110,
+    "Usability": 63,
+    "Security": 56,
+    "Performance": 53,
+    "Look and Feel": 34,
+    "Availability": 21,
+    "Scalability": 21,
+    "Maintainability": 17,
+    "Legal": 10,
+    "Portability": 2
+  },
+  "type_counts": {
+    "FR": 312,
+    "F": 208,
+    "NFR": 110,
+    "US": 63,
+    "O": 58,
+    "SE": 56,
+    "PE": 53,
+    "LF": 34,
+    "A": 21,
+    "SC": 21,
+    "MN": 17,
+    "L": 10,
+    "FT": 10,
+    "PO": 2
+  },
+  "saved_index": "E:\\New folder\\FYP\\AI_SRS_UML_Project\\AIRA_ML\\srs_generation_index.joblib",
+  "backend_index_copy": "E:\\New folder\\FYP\\AI_SRS_UML_Project\\backend\\aira-ai\\models\\srs_generation_index.joblib"
+}

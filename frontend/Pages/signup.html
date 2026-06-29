@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Sign Up - AIRA</title>
+    <link rel="icon" type="image/png" href="assets/aira-logo-mark.png">
+    <link rel="stylesheet" href="style.css?v=20260614-srs-layout-v4">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<header class="topbar">
+    <div class="menu-icon" onclick="toggleSidebar()">&#9776;</div>
+    <h2 class="top-title"><span class="top-logo" aria-hidden="true"><img src="assets/aira-logo-mark.png" alt=""></span><span class="top-title-text">AIRA - Artificial Intelligence Requirement Analyzer</span></h2>
+</header>
+
+<div class="layout">
+    <aside class="sidebar collapsed" id="sidebar">
+        <ul>
+            <li onclick="location.href='index.html'">Home</li>
+            <li onclick="location.href='generate-srs.html'">Generate SRS</li>
+            <li onclick="location.href='generate-uml.html'">Generate UML</li>
+            <li onclick="location.href='check-srs.html'">AI Analysis</li>
+            <li onclick="location.href='upload-uml.html'">UML Image Description</li>
+            <hr>
+            <li onclick="location.href='login.html'">Login</li>
+            <li class="active">Sign Up</li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <div class="auth-container">
+            <div class="auth-card">
+                <span class="eyebrow" data-i18n="auth.createEyebrow">Create Your Account</span>
+                <h1 data-i18n="auth.createTitle">Create Account</h1>
+                <p data-i18n="auth.createHelp">Register to access AIRA features and keep your work organized.</p>
+
+                <label data-i18n="auth.fullName">Full Name</label>
+                <input type="text" id="signupName" placeholder="Enter your full name" data-i18n-placeholder="auth.fullNamePlaceholder">
+
+                <label data-i18n="auth.email">Email Address</label>
+                <input type="email" id="signupEmail" placeholder="Enter your email" data-i18n-placeholder="auth.emailPlaceholder">
+
+                <label data-i18n="auth.password">Password</label>
+                <div class="password-field">
+                    <input type="password" id="password" placeholder="Create a password" data-i18n-placeholder="auth.createPasswordPlaceholder">
+                    <i class="fa-solid fa-eye" onclick="togglePassword('password', this)"></i>
+                </div>
+
+                <label data-i18n="auth.confirmPassword">Confirm Password</label>
+                <div class="password-field">
+                    <input type="password" id="confirmPassword" placeholder="Confirm your password" data-i18n-placeholder="auth.confirmPasswordPlaceholder">
+                    <i class="fa-solid fa-eye" onclick="togglePassword('confirmPassword', this)"></i>
+                </div>
+
+                <div class="form-message" id="signupStatus"></div>
+
+                <button class="primary-btn auth-submit" type="button" onclick="signupUser()">
+                    <span data-i18n="auth.signup">Sign Up</span>
+                </button>
+
+                <div class="auth-link">
+                    <span data-i18n="auth.hasAccount">Already have an account?</span>
+                    <a href="login.html" data-i18n="auth.login">Login</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<footer class="footer">
+    Final Year Project - AIRA
+</footer>
+
+<script src="app.js?v=20260528-urdu-v1"></script>
+
+</body>
+</html>
+
+
