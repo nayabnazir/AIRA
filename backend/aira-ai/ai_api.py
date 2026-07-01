@@ -6,7 +6,6 @@ import tempfile
 from pathlib import Path
 
 from ai.srs_ambiguity_service import analyze_srs_ambiguity
-from ai.uml_image_description_service import describe_confirmed_uml_structure, describe_uml_image, describe_uml_project
 from ai.uml_image_generation_service import generate_uml_image
 
 
@@ -17,6 +16,29 @@ IMAGE_EXTENSIONS = {
     "image/webp": ".webp",
     "image/bmp": ".bmp",
 }
+
+
+def load_uml_description_service():
+    try:
+        from ai.uml_image_description_service import (
+            describe_confirmed_uml_structure,
+            describe_uml_image,
+            describe_uml_project,
+        )
+        return describe_confirmed_uml_structure, describe_uml_image, describe_uml_project
+    except ModuleNotFoundError as error:
+        missing = getattr(error, "name", "") or str(error)
+        if missing == "cv2":
+            raise RuntimeError(
+                "OpenCV is not installed on the server. Add opencv-python-headless to "
+                "backend/aira-ai/requirements.txt and redeploy."
+            ) from error
+        if missing == "pytesseract":
+            raise RuntimeError(
+                "pytesseract is not installed on the server. Add pytesseract to "
+                "backend/aira-ai/requirements.txt and redeploy."
+            ) from error
+        raise
 
 
 def main():
@@ -669,6 +691,8 @@ def build_requirement_correction(item):
 
 
 def describe_uploaded_uml_image(payload):
+    describe_confirmed_uml_structure, describe_uml_image, describe_uml_project = load_uml_description_service()
+
     confirmed_structure = payload.get("confirmedStructure")
     if isinstance(confirmed_structure, dict):
         return describe_confirmed_uml_structure(confirmed_structure)

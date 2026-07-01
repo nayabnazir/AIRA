@@ -208,7 +208,7 @@ function runAiAction(action, payload, timeoutMs = AI_TIMEOUT_MS) {
       try {
         parsed = JSON.parse(stdout);
       } catch {
-        reject(new Error(stderr.trim() || "AI model returned an unreadable response."));
+        reject(new Error(cleanAiBridgeError(stdout, stderr) || "AI model returned an unreadable response."));
         return;
       }
 
@@ -223,6 +223,21 @@ function runAiAction(action, payload, timeoutMs = AI_TIMEOUT_MS) {
     child.stdin.write(JSON.stringify({ action, ...payload }));
     child.stdin.end();
   });
+}
+
+function cleanAiBridgeError(stdout, stderr) {
+  const text = `${stderr || ""}\n${stdout || ""}`.trim();
+  if (!text) return "";
+  if (text.includes("ModuleNotFoundError: No module named 'cv2'")) {
+    return "OpenCV is missing on the server. Redeploy after installing opencv-python-headless.";
+  }
+  if (text.includes("ModuleNotFoundError: No module named 'pytesseract'")) {
+    return "pytesseract is missing on the server. Redeploy after installing pytesseract.";
+  }
+  if (text.includes("Unexpected end of JSON input")) {
+    return "AI provider returned an incomplete response. Please try again.";
+  }
+  return text.split(/\r?\n/).slice(-8).join("\n");
 }
 
 async function saveAmbiguityAnalysis(body, result) {

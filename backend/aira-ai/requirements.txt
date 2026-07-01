@@ -1,5 +1,7 @@
 joblib
 numpy
 pillow
+opencv-python-headless
+pytesseract
 scikit-learn
 graphviz
